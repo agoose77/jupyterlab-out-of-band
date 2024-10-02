@@ -54,7 +54,15 @@ export class OutOfBandMimeRenderer
   async renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     const data = model.data[this._mimeType] as JSONObject;
     const hash = data['hash'] as string;
-    const trueMime = data['mimeType'] as string;
+
+    const possibleMimeTypes = data['mimeTypes'] as string[];
+    const placeholderBundle: { [key: string]: string } = {};
+    possibleMimeTypes.forEach(mimeType => {
+      placeholderBundle[mimeType] = '';
+    });
+    const preferredMimeType =
+      this.registry.preferredMimeType(placeholderBundle) ??
+      possibleMimeTypes[0];
 
     const layout = this.layout as SingletonLayout;
     if (layout.widget) {
@@ -67,8 +75,7 @@ export class OutOfBandMimeRenderer
       trusted: model.trusted,
       data: trueData
     });
-    const widget = this.registry.createRenderer(trueMime);
-    console.log(trueModel);
+    const widget = this.registry.createRenderer(preferredMimeType);
     layout.widget = widget;
     await widget.renderModel(trueModel);
   }
