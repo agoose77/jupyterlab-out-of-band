@@ -1,0 +1,18 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.3.5
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: goosey15@gmail.com
+author_name: Angus Hollands
+data_format: json
+file_extension: .nbtx.json
+has_binder: false
+kind: mimerenderer
+labextension_name: jupyterlab-out-of-band
+mimetype: application/vnd.nbtx.output+json
+mimetype_name: Out of Band MIME
+project_short_description: A JupyterLab extension to move MIME bundles out of band
+python_name: jupyterlab_out_of_band
+repository: ''
+test: false
+viewer_name: Out Of Band MIME
+
