@@ -2,7 +2,22 @@
 
 [![Github Actions Status](/workflows/Build/badge.svg)](/actions/workflows/build.yml)
 
-A JupyterLab extension to move MIME bundles out of band
+A JupyterLab extension to add support for a filesystem-backed "out of band" MIME model. This is a proof-of-concept for the idea of an "out of band" MIME model, which is a MIME bundle whose contents are not materialised.
+
+```typescript
+type MimeBundle = { [key: string]: any };
+
+type DeferredMimeBundle = {
+  'application/vnd.nbtx.output+json': {
+    hash: string;
+    mimeTypes: string[];
+  };
+};
+
+type Resolver = (bundle: DeferredMimeBundle) => Promise<MimeBundle>;
+```
+
+Whilst this repo only implements a simple `/mime` file-based resolver, this could easily be incorporated with a network-backed resolver, and an extension that replaces mime bundles with their out-of-band counterparts. This extension could act at the display level, or at the frontend level.
 
 ## Requirements
 
